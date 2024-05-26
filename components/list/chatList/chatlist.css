@@ -1,0 +1,109 @@
+.chalist {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+/* Rest of your CSS remains unchanged */
+
+
+.search {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.searchBar {
+    flex: 1;
+    background-color: rgba(17, 25, 40, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-radius: 10px;
+}
+
+input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    flex: 1;
+}
+
+img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.add {
+    width: 36px;
+    height: 36px;
+    background-color: rgba(17, 25, 40, 0.5);
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer; 
+}
+
+.item {
+    display: flex; /* Add flexbox to the item container */
+    align-items: center; /* Vertically center align items */
+    margin-bottom: 20px; /* Add margin to create space between items */
+}
+
+.item img {
+    width: 100px; 
+    height: 100px; 
+    cursor: pointer;
+    margin-right: 40px; /* Increase margin between image and text */
+    border-bottom: 1px solid #dddddd35;
+}
+
+.texts {
+    display: flex; /* Use flexbox for the text container */
+    flex-direction: column; /* Arrange text vertically */
+}
+
+/* Additional styling for the text elements */
+.texts span {
+    font-weight: bold;
+}
+
+.texts p {
+    margin: 0; /* Remove default paragraph margin */
+}
+
+/* Styling for scrollbar */
+.chalist::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+.chalist::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3); /* Transparent background */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.texts{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+span{
+    font-weight: 500;
+}
+
+.p{
+    font-size: 14;
+    font-weight: 300;
+}
