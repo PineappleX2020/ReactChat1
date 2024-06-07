@@ -1,7 +1,18 @@
 import React from 'react';
+import { auth } from '../../lib/firebase'; // Adjust the import path as necessary
 import './detail.css';
 
 const Detail = () => {
+  const handleLogout = () => {
+    auth.signOut()
+      .then(() => {
+        console.log('User signed out');
+      })
+      .catch(error => {
+        console.error('Sign out error', error);
+      });
+  };
+
   return (
     <div className="detail">
       <div className="user">
@@ -46,7 +57,7 @@ const Detail = () => {
         </div>
       </div>
       <button>Block User</button>
-      <button className="Logout">Logout</button>
+      <button className="Logout" onClick={handleLogout}>Logout</button>
     </div>
   );
 };

@@ -1,10 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./chat.css";
 import EmojiPicker from "emoji-picker-react";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../../lib/firebase";
+import { useChatStore } from "../../lib/chatStore";
 
 const Chat = () => {
+  const [chat, setChat] = useState();
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
+
+  const {chatId} = useChatStore();
   const [messages, setMessages] = useState([
     { id: 1, text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.", own: true, timestamp: "1 min ago" },
     { id: 2, text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.", own: false, timestamp: "1 min ago" },
@@ -17,6 +23,22 @@ const Chat = () => {
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  useEffect(() => {
+    const unSub = onSnapshot(doc(db, "chats", chatId), (res) => {
+      setChat(res.data());
+    });
+    return () => {
+      unSub();
+    };
+  }, [chatId]);
+
+  // Log the chat object in a readable format
+  useEffect(() => {
+    if (chat) {
+      console.log(JSON.stringify(chat, null, 2));
+    }
+  }, [chat]);
 
   const handleEmoji = (e) => {
     setText((prev) => prev + e.emoji);
@@ -48,7 +70,7 @@ const Chat = () => {
       </div>
 
       <div className="center">
-        {messages.map((msg) => (
+        {chat?.messages.map((message) => (
           <div className={`message ${msg.own ? "own" : ""}`} key={msg.id}>
             {!msg.own && <img src="avatar.png" alt="Avatar" />}
             <div className="texts">
